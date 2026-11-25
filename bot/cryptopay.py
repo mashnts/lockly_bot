@@ -1,7 +1,7 @@
 from aiocryptopay import AioCryptoPay, Networks
 from bot.config import settings
 
-crypto = AioCryptoPay(token=settings.CRYPTOBOT_TOKEN, network=Networks.TEST_NET)
+crypto = AioCryptoPay(token=settings.CRYPTOBOT_TOKEN, network=Networks.MAIN_NET)
 
 async def create_invoice(asset: str, amount: float, description: str, payload: str, expires_in: str):
     invoice = await crypto.create_invoice(

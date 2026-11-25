@@ -4,8 +4,8 @@ from aiogram.types import BotCommand
 from bot.config import settings
 from bot.handlers import start, channel, dashboard, subscribe, my_subscriptions, cancel
 import logging
-
 logging.basicConfig(level=logging.INFO)
+
 
 async def main():
     bot = Bot(token=settings.BOT_TOKEN)
@@ -16,15 +16,15 @@ async def main():
     dp.include_router(subscribe.router)
     dp.include_router(my_subscriptions.router)
     dp.include_router(cancel.router)
-
-
     await bot.set_my_commands([
         BotCommand(command="start", description="Запустить бота"),
         BotCommand(command="addchannel", description="Добавить канал"),
         BotCommand(command="dashboard", description="Мой кабинет"),
         BotCommand(command="subscribe", description="Подписаться на канал"),
         BotCommand(command="mysubscriptions", description="Мои подписки"),
+        BotCommand(command="cancel", description="Отменить действие"),
     ])
+
 
     await dp.start_polling(bot)
 

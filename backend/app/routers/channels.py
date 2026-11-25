@@ -6,11 +6,11 @@ from app.models import Channel, Author, Subscriber
 from app.schemas import ChannelCreate, ChannelResponse, SubscriberResponse
 from app.deps import verify_internal_token
 
-router = APIRouter(prefix="/channels", tags=["channels"])
+router = APIRouter(prefix="/channels", tags=["channels"], dependencies=[Depends(verify_internal_token)])
 
 
 @router.post("/", response_model=ChannelResponse)
-async def create_channel(data: ChannelCreate, db: AsyncSession = Depends(get_db), _=Depends(verify_internal_token)):
+async def create_channel(data: ChannelCreate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Author).where(Author.telegram_id == data.author_telegram_id))
     author = result.scalar_one_or_none()
     if not author:

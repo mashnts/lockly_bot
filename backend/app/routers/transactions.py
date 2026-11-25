@@ -6,10 +6,10 @@ from app.models import Transaction
 from app.schemas import TransactionCreate, TransactionResponse
 from app.deps import verify_internal_token
 
-router = APIRouter(prefix="/transactions", tags=["transactions"])
+router = APIRouter(prefix="/transactions", tags=["transactions"], dependencies=[Depends(verify_internal_token)])
 
 @router.post("/", response_model=TransactionResponse)
-async def create_transaction(data: TransactionCreate, db: AsyncSession = Depends(get_db), _=Depends(verify_internal_token)):
+async def create_transaction(data: TransactionCreate, db: AsyncSession = Depends(get_db)):
 
     transaction = Transaction(
         channel_id = data.channel_id,

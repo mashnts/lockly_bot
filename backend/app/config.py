@@ -6,8 +6,10 @@ class Settings(BaseSettings):
     CRYPTOBOT_TOKEN: str
     SECRET_KEY: str
     INTERNAL_API_TOKEN: str
+    SQL_ECHO: bool = False
 
     class Config:
         env_file = ".env"
+        extra = "ignore"
 
 settings = Settings()

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from decimal import Decimal
 
 
 class AuthorCreate(BaseModel):
@@ -11,7 +12,7 @@ class AuthorResponse(BaseModel):
     id: int
     telegram_id: int
     username: str | None
-    balance: float
+    balance: Decimal
     created_at: datetime
 
     class Config:
@@ -23,7 +24,7 @@ class ChannelCreate(BaseModel):
     author_telegram_id: int
     title: str
     description: str | None
-    price: float
+    price: Decimal
     period_days: int
 
 
@@ -33,7 +34,7 @@ class ChannelResponse(BaseModel):
     telegram_chat_id: int
     title: str
     description: str | None
-    price: float
+    price: Decimal
     period_days: int
     is_active: bool
     created_at: datetime
@@ -55,13 +56,13 @@ class SubscriberResponse(BaseModel):
 
 
 class WithdrawalCreate(BaseModel):
-    amount: float
+    amount: Decimal
 
 
 class WithdrawalResponse(BaseModel):
     id: int
     author_id: int
-    amount: float
+    amount: Decimal
     status: str
     created_at: datetime
 
@@ -77,7 +78,7 @@ class CryptoBotWebhook(BaseModel):
 class TransactionCreate(BaseModel):
     subscriber_telegram_id: int
     channel_id: int
-    amount: int
+    amount: Decimal
     cryptobot_invoice_id: str
 
 
@@ -85,7 +86,7 @@ class TransactionResponse(BaseModel):
     id: int
     subscriber_telegram_id: int
     channel_id: int
-    amount: float
+    amount: Decimal
     status: str
     cryptobot_invoice_id: str
     created_at: datetime
