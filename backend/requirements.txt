@@ -2,6 +2,7 @@ fastapi
 uvicorn
 sqlalchemy[asyncio]
 asyncpg
+psycopg[binary]
 alembic
 httpx
 pydantic-settings
